@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ingredient;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\FuncCall;
 
 class IngredientController extends Controller
 {
@@ -15,8 +16,7 @@ class IngredientController extends Controller
 
     public function create()
     {
-        $ingredients = Ingredient::all();
-        return view('pages/create', compact('ingredients'));
+        return view('pages/create');
     }
 
     public function store(Request $request)
@@ -26,7 +26,20 @@ class IngredientController extends Controller
         $store->quantite = $request->quantite;
         $store->photo = $request->photo;
 
-        $store->save;
+        $store->save();
+        return redirect()->back();
+    }
+
+    public function show($id)
+    {
+        $show = Ingredient::find($id);
+        return view('pages/show', compact('show'));
+    }
+
+    public function destroy($id)
+    {
+        $destroy = Ingredient::find($id);
+        $destroy->delete();
         return redirect()->back();
     }
 }

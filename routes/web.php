@@ -23,3 +23,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [IngredientController::class, 'index']);
 Route::get('/create', [IngredientController::class, 'create']);
 Route::post('/ingredient-store', [IngredientController::class, 'store']);
+Route::post('/delete-ingredient/{id}', [IngredientController::class, 'destroy']);
+Route::get('/show-ingredient/{id}', [IngredientController::class, 'show']);
